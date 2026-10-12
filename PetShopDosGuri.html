@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetShopDosGuri</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f7fb;color:#1f2937;display:flex;min-height:100vh}
+.sidebar{width:240px;background:#fff;border-right:1px solid #e5e7eb;padding:22px 14px;position:fixed;height:100vh}
+.logo{font-size:22px;font-weight:800;padding:8px 12px 28px;color:#111827}
+.logo span{color:#16a34a}
+.nav button{width:100%;border:0;background:transparent;text-align:left;padding:13px 14px;margin:3px 0;border-radius:10px;cursor:pointer;font-size:15px;color:#4b5563}
+.nav button:hover,.nav button.active{background:#dcfce7;color:#15803d;font-weight:700}
+.main{margin-left:240px;width:calc(100% - 240px);padding:28px}
+.screen{display:none}.screen.active{display:block}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.header h1{font-size:28px}.header p{color:#6b7280;margin-top:5px}
+.btn{border:0;border-radius:9px;padding:11px 16px;background:#16a34a;color:#fff;font-weight:700;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;box-shadow:0 2px 8px #00000008}
+.card small{color:#6b7280}.card strong{display:block;font-size:27px;margin-top:9px}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;margin-bottom:18px}
+.panel h3{margin-bottom:16px}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #eef0f3;font-size:14px}
+th{color:#6b7280;font-size:12px;text-transform:uppercase}
+.badge{padding:5px 9px;border-radius:20px;font-size:12px;background:#dcfce7;color:#166534}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.input{display:flex;flex-direction:column;gap:6px}
+.input label{font-size:13px;font-weight:700}
+.input input,.input select{padding:12px;border:1px solid #d1d5db;border-radius:8px;background:#fff}
+.full{grid-column:1/-1}
+.search{padding:11px 14px;border:1px solid #d1d5db;border-radius:8px;width:280px}
+.actions{display:flex;gap:10px;align-items:center;margin-bottom:15px}
+.stat{display:flex;justify-content:space-between;align-items:center}
+.icon{font-size:26px}
+.service{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eee}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.sidebar{width:190px}.main{margin-left:190px;width:calc(100% - 190px)}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="logo">🐾 PetShop<span>DosGuri</span></div>
+  <nav class="nav">
+    <button class="active" onclick="show('dashboard',this)">🏠 Dashboard</button>
+    <button onclick="show('clientes',this)">🐶 Clientes e Pets</button>
+    <button onclick="show('agendamentos',this)">📅 Agendamentos</button>
+    <button onclick="show('vendas',this)">🛒 Vendas / PDV</button>
+    <button onclick="show('estoque',this)">📦 Estoque</button>
+    <button onclick="show('financeiro',this)">💰 Financeiro</button>
+    <button onclick="show('funcionarios',this)">👥 Funcionários</button>
+    <button onclick="show('config',this)">⚙️ Configurações</button>
+  </nav>
+</aside>
+
+<main class="main">
+<section id="dashboard" class="screen active">
+  <div class="header"><div><h1>Dashboard</h1><p>Visão geral do PetShopDosGuri</p></div><button class="btn" onclick="show('agendamentos',document.querySelectorAll('.nav button')[2])">+ Novo agendamento</button></div>
+  <div class="cards">
+    <div class="card"><div class="stat"><small>Agendamentos hoje</small><span class="icon">📅</span></div><strong>18</strong></div>
+    <div class="card"><div class="stat"><small>Clientes</small><span class="icon">👤</span></div><strong>324</strong></div>
+    <div class="card"><div class="stat"><small>Pets cadastrados</small><span class="icon">🐕</span></div><strong>487</strong></div>
+    <div class="card"><div class="stat"><small>Faturamento hoje</small><span class="icon">💵</span></div><strong>R$ 1.280</strong></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h3>Próximos agendamentos</h3><table><tr><th>Horário</th><th>Pet</th><th>Serviço</th><th>Status</th></tr>
+    <tr><td>09:00</td><td>Thor 🐶</td><td>Banho e tosa</td><td><span class="badge">Confirmado</span></td></tr>
+    <tr><td>10:30</td><td>Luna 🐱</td><td>Banho</td><td><span class="badge">Confirmado</span></td></tr>
+    <tr><td>13:00</td><td>Mel 🐶</td><td>Tosa</td><td><span class="badge">Confirmado</span></td></tr></table></div>
+    <div class="panel"><h3>Serviços mais procurados</h3>
+      <div class="service"><span>🛁 Banho</span><b>42</b></div>
+      <div class="service"><span>✂️ Banho e tosa</span><b>31</b></div>
+      <div class="service"><span>🧼 Tosa</span><b>19</b></div>
+      <div class="service"><span>🦷 Higiene bucal</span><b>8</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" class="screen">
+  <div class="header"><div><h1>Clientes e Pets</h1><p>Cadastre tutores e seus animais</p></div><button class="btn">+ Novo cliente</button></div>
+  <div class="actions"><input class="search" placeholder="🔎 Buscar cliente ou pet..."></div>
+  <div class="panel"><table><tr><th>Cliente</th><th>Telefone</th><th>Pet</th><th>Espécie</th><th>Última visita</th></tr>
+  <tr><td>João Silva</td><td>(51) 99999-0000</td><td>Thor</td><td>Cachorro</td><td>12/09/2026</td></tr>
+  <tr><td>Ana Souza</td><td>(51) 98888-1111</td><td>Luna</td><td>Gato</td><td>10/09/2026</td></tr>
+  <tr><td>Pedro Costa</td><td>(51) 97777-2222</td><td>Mel</td><td>Cachorro</td><td>08/09/2026</td></tr></table></div>
+</section>
+
+<section id="agendamentos" class="screen">
+  <div class="header"><div><h1>Agendamentos</h1><p>Controle os serviços do dia</p></div><button class="btn">+ Agendar serviço</button></div>
+  <div class="panel"><div class="form">
+    <div class="input"><label>Cliente</label><input placeholder="Nome do cliente"></div>
+    <div class="input"><label>Pet</label><input placeholder="Nome do pet"></div>
+    <div class="input"><label>Data</label><input type="date"></div>
+    <div class="input"><label>Horário</label><input type="time"></div>
+    <div class="input"><label>Serviço</label><select><option>Banho</option><option>Banho e tosa</option><option>Tosa</option><option>Higiene bucal</option></select></div>
+    <div class="input"><label>Profissional</label><select><option>Escolher profissional</option><option>João</option><option>Marcos</option></select></div>
+    <div class="input full"><button class="btn">Salvar agendamento</button></div>
+  </div></div>
+</section>
+
+<section id="vendas" class="screen">
+  <div class="header"><div><h1>Vendas / PDV</h1><p>Registre produtos e pagamentos</p></div></div>
+  <div class="grid2"><div class="panel"><h3>Produtos</h3><div class="actions"><input class="search" placeholder="🔎 Buscar produto..."></div><table><tr><th>Produto</th><th>Preço</th><th></th></tr>
+  <tr><td>Ração Premium 10kg</td><td>R$ 129,90</td><td><button class="btn">Adicionar</button></td></tr>
+  <tr><td>Shampoo Pet</td><td>R$ 34,90</td><td><button class="btn">Adicionar</button></td></tr>
+  <tr><td>Brinquedo Bola</td><td>R$ 19,90</td><td><button class="btn">Adicionar</button></td></tr></table></div>
+  <div class="panel"><h3>Carrinho</h3><div class="service"><span>Ração Premium 10kg × 1</span><b>R$ 129,90</b></div><div class="service"><span>Shampoo Pet × 1</span><b>R$ 34,90</b></div><br><h2>Total: R$ 164,80</h2><br><button class="btn" style="width:100%">Finalizar venda</button></div></div>
+</section>
+
+<section id="estoque" class="screen">
+  <div class="header"><div><h1>Estoque</h1><p>Controle de produtos e quantidades</p></div><button class="btn">+ Novo produto</button></div>
+  <div class="panel"><table><tr><th>Produto</th><th>Categoria</th><th>Estoque</th><th>Preço</th><th>Status</th></tr>
+  <tr><td>Ração Premium 10kg</td><td>Ração</td><td>24</td><td>R$ 129,90</td><td><span class="badge">Normal</span></td></tr>
+  <tr><td>Shampoo Pet</td><td>Higiene</td><td>6</td><td>R$ 34,90</td><td><span class="badge">Normal</span></td></tr>
+  <tr><td>Petisco Natural</td><td>Petiscos</td><td>2</td><td>R$ 14,90</td><td><span class="badge">Estoque baixo</span></td></tr></table></div>
+</section>
+
+<section id="financeiro" class="screen">
+  <div class="header"><div><h1>Financeiro</h1><p>Acompanhe receitas e despesas</p></div></div>
+  <div class="cards"><div class="card"><small>Receitas</small><strong>R$ 18.450</strong></div><div class="card"><small>Despesas</small><strong>R$ 7.320</strong></div><div class="card"><small>Lucro</small><strong>R$ 11.130</strong></div><div class="card"><small>Vendas</small><strong>146</strong></div></div>
+  <div class="panel"><h3>Movimentações recentes</h3><table><tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Valor</th></tr>
+  <tr><td>14/09</td><td>Venda de produtos</td><td>Entrada</td><td>R$ 164,80</td></tr>
+  <tr><td>14/09</td><td>Compra de ração</td><td>Saída</td><td>R$ 850,00</td></tr></table></div>
+</section>
+
+<section id="funcionarios" class="screen">
+  <div class="header"><div><h1>Funcionários</h1><p>Equipe do PetShopDosGuri</p></div><button class="btn">+ Novo funcionário</button></div>
+  <div class="panel"><table><tr><th>Nome</th><th>Cargo</th><th>Telefone</th><th>Status</th></tr>
+  <tr><td>João Pereira</td><td>Banho e tosa</td><td>(51) 96666-3333</td><td><span class="badge">Ativo</span></td></tr>
+  <tr><td>Marcos Lima</td><td>Atendente</td><td>(51) 95555-4444</td><td><span class="badge">Ativo</span></td></tr></table></div>
+</section>
+
+<section id="config" class="screen">
+  <div class="header"><div><h1>Configurações</h1><p>Personalize o sistema</p></div></div>
+  <div class="panel"><h3>Dados do estabelecimento</h3><div class="form">
+    <div class="input"><label>Nome do pet shop</label><input value="PetShopDosGuri"></div>
+    <div class="input"><label>Telefone</label><input placeholder="(00) 00000-0000"></div>
+    <div class="input"><label>E-mail</label><input placeholder="contato@petshop.com"></div>
+    <div class="input"><label>Endereço</label><input placeholder="Rua, número, bairro"></div>
+    <div class="input full"><button class="btn">Salvar alterações</button></div>
+  </div></div>
+</section>
+</main>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>
